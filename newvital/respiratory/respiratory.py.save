@@ -1,0 +1,57 @@
+import math
+import cv2
+import numpy as np
+import time
+
+
+capture = cv2.VideoCapture(0)
+GreenAvglist = []
+RedAvglist = []
+tic = time.clock()
+
+for i in range(100):
+    ret, frame = capture.read()
+    """
+    cap = cv2.imshow('video', frame)
+    x = capture.set(cv2.CAP_PROP_FRAME_WIDTH,340)
+    y = capture.set(cv2.CAP_PROP_FRAME_WIDTH,480)
+    print("here")
+    """
+    cap = cv2.resize(frame, (340, 480))
+    RedAvg=0.0
+    num=0.0
+    RedTotal=0.0
+    GreenTotal=0.0
+
+    for x in range (0,340,1):
+      for y in range(0,480,1):
+        color = frame[y,x]
+        num=num+1
+        RedTotal=color[0]+RedTotal
+        GreenTotal =color[1]+GreenTotal
+        RedAvg = (RedTotal)/num
+        GreenAvg=GreenTotal/num
+    GreenAvglist.append(GreenAvg)
+    RedAvglist.append(RedAvg)
+
+    toc = time.clock()
+    timer = toc -tic
+    if (timer) >30:
+        SampleFreq = timer/len(GreenAvglist)
+        RRFreq = np.fft.rfft(GreenAvglist)
+        freqs = np.fft.rfftfreq(len(RRFreq), d=SampleFreq)
+	print (freqs)
+        frequency in
+#       req)
+       # bpm = int(math.ceil(RRFreq*60))
+        #RR1Freq = Fft.fft(RedAvgList, timer, SampleFreq)
+        #bpm = int(math.ceil(RR1Freq*60))
+	tic = time.clock()
+ #     print len(GreenAvglist)
+#      print len(RedAvglist)
+
+#    if cv2.waitKey(1) == 27:
+ #       break
+capture.release()
+cv2.destroyAllWindows()
+#print(RRFreq)

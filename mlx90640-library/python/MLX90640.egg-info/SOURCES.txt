@@ -1,0 +1,10 @@
+MLX90640.py
+cffi_wrapper.cpp
+setup.py
+../functions/MLX90640_API.cpp
+../functions/MLX90640_LINUX_I2C_Driver.cpp
+MLX90640.egg-info/PKG-INFO
+MLX90640.egg-info/SOURCES.txt
+MLX90640.egg-info/dependency_links.txt
+MLX90640.egg-info/requires.txt
+MLX90640.egg-info/top_level.txt
